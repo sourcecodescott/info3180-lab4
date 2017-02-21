@@ -1,23 +1,26 @@
+
 {% extends 'base.html' %}
 
 {% block main %}
-<h2 class="page-header">Uploaded Files</h2>
-<ul>
-  {% for files in myfiles %}
-  {% if not (files.lower().endswith(('.jpg'))) %}
-    <li>{{ files }}</li>
-  {% endif %}
-  {% endfor %}
-</ul>
 
-<h2 class="page-header">Display</h2>
-{% for files in myfiles %}
-{% if (files.lower().endswith(('.jpg'))) %}
-       <p> <img src="{{ url_for('static', filename='uploadedfiles/') }}{{ files }}" alt="{{ files }}"
-             style="height: 100px; width: 100px;"></p>
-{% endif %}
+<h1>Uploaded Files</h1>
 
+<ol>
 
+{% for file in myfiles %}
+
+	{% if file[-3:]== 'jpg' or file[-4:]== 'jpeg' %}
+
+		<img src={{ url_for('static',filename= "uploads/"+ file )}} height="200" width="200">
+
+		{% else %}
+
+			<li>{{file}}</li>
+
+	{% endif %}
 
 {% endfor %}
+
+</ol>
+
 {% endblock %}
